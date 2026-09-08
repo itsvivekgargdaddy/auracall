@@ -21022,3 +21022,18 @@ DISPLAY=:0.0 ORACLE_NO_BANNER=1 NODE_NO_WARNINGS=1 pnpm tsx bin/auracall.ts file
   a green gate from the empty checks list.
 
 - Plan 0334 final validation: 3,087 full-suite passes and 65 skips. The mutation-audit expectation is repaired (six focused passes). One Grok readback timeout reproduces on unchanged origin/main 882c9c14 and is nonblocking for Skills. Local focused/typecheck/build/lint/live proof is accepted; GitHub has no CI results and no required branch checks or rulesets.
+
+## Turn 428 | 2026-09-08
+
+- Plan 0339/P32 opens on the newly owned `itsvivekgargdaddy/auracall` fork at
+  source commit `3861d281`. `origin` is owned; the Eric Cochran upstream remote
+  is fetch-only with its push URL disabled.
+- Provider-free reconnaissance passed typecheck, build, ten focused test files
+  (28 tests), version, and dry-run. The production audit reports one critical
+  and 29 high advisories, so installation is gated on dependency remediation.
+- The bounded lane also repairs downstream metadata/license, operator-specific
+  runtime defaults, the Node-22-only WSL bootstrap check, CI's Node 20 drift,
+  and the stale bundled Codex skill. After full provider-free validation it
+  may publish to the owned fork, install the user CLI, and register a narrow
+  prompt-gated MCP server. API service, browser, login, and prompt effects are
+  excluded.

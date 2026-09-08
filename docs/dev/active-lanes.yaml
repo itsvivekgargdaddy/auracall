@@ -579,3 +579,21 @@ lanes:
     integration_receipt: 3cfb1de941a6b9c9a445874c7ec001513b273d65
     validation_ref: docs/dev/notes/2026-09-06-plan0338-validation.json
     validation_status: provider-free-accepted
+  - id: P32
+    objective: Harden the owned downstream fork and install a prompt-gated local Codex MCP runtime without provider effects.
+    plan: docs/dev/plans/0339-2026-09-08-downstream-bootstrap-hardening.md
+    plan_ref: refs/heads/fix/plan0339-downstream-bootstrap-hardening
+    branch: fix/plan0339-downstream-bootstrap-hardening
+    target: main
+    plan_state: OPEN
+    custody_state: ACTIVE_WORKTREE
+    checkpoint: 3861d28104e8a731ae172d637f299e0c50664152
+    remote_ref: null
+    integration: merge
+    dependencies: [P31]
+    overlaps: []
+    validation_status: audit-complete-implementation-open
+    validation_ref: null
+    blocker: null
+    disposition: Owned-fork hardening and provider-free local installation are in progress; API service, browser, login, and prompt effects remain excluded.
+    updated_at: 2026-09-08
