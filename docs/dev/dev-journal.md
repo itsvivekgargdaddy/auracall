@@ -49044,6 +49044,8 @@ Chat repair integrated. Inventory complete at 11. Blank-tab readiness fix instal
   inherited WSL simulations do not apply on macOS and colon-bearing runtime
   directory IDs are not valid on native Windows.
 - CI now runs the complete 3,113-test gate on the target Ubuntu/WSL lane and an
-  85-test portable downstream-bootstrap/MCP gate on macOS and Windows, in
-  addition to frozen install and lint everywhere. No platform failure crossed
-  the provider-free effect boundary.
+  83-test portable downstream-bootstrap/MCP gate on macOS and Windows, in
+  addition to frozen install and lint everywhere. The cross-platform subset
+  excludes one two-case MCP HTTP status test that creates the same unsupported
+  colon-bearing Windows directory; it remains in the Linux gate. No platform
+  failure crossed the provider-free effect boundary.

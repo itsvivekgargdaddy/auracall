@@ -21073,7 +21073,10 @@ DISPLAY=:0.0 ORACLE_NO_BANNER=1 NODE_NO_WARNINGS=1 pnpm tsx bin/auracall.ts file
   Windows reported 346 failures dominated by colon-bearing runtime directory
   names that are invalid on Windows. These are target-scope findings, not
   provider failures; no browser, service, credential, or prompt effect ran.
-- Revision 5 keeps the complete deterministic suite on the target Ubuntu/WSL
-  lane. macOS and Windows retain frozen install and lint, then run the 85
-  portable downstream-bootstrap and MCP contract tests. Local reproduction of
-  that portable gate passes 85/85; plan audit remains at zero errors.
+- Revisions 5-6 keep the complete deterministic suite on the target Ubuntu/WSL
+  lane. macOS and Windows retain frozen install and lint, then run 83 portable
+  downstream-bootstrap and MCP contract tests. The first narrowed Windows run
+  showed that two MCP API-operations status cases create the same unsupported
+  colon-bearing directory; they remain covered by the complete Linux gate and
+  are excluded only from the cross-platform subset. Plan audit remains at zero
+  errors.

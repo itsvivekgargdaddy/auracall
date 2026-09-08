@@ -5,7 +5,7 @@ Lane: P32
 Branch: fix/plan0339-downstream-bootstrap-hardening
 Target: main
 Integration: merge
-Revision: 5 | 2026-09-08
+Revision: 6 | 2026-09-08
 
 ## Stable Objective
 
@@ -31,7 +31,8 @@ repository or activating provider/browser effects.
   macOS and Windows run the portable downstream-bootstrap and MCP contracts:
   the inherited complete suite contains WSL simulations that are invalid on
   macOS and Windows-native runtime IDs with colons that cannot be directory
-  names on Windows.
+  names on Windows. The portable subset excludes the one MCP API-operations
+  status test that creates the same unsupported Windows runtime directory.
 - Owned-fork review/integration, user-scoped CLI installation, narrow Codex MCP
   registration, installed smoke checks, and final closeout remain.
 

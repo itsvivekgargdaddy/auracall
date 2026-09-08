@@ -117,8 +117,8 @@
     "matrix": ["ubuntu-latest", "macos-latest", "windows-2022"],
     "validation_scope": {
       "ubuntu-latest": "complete provider-free single-worker release suite plus build",
-      "macos-latest": "frozen install, lint, downstream bootstrap contract, and MCP contracts",
-      "windows-2022": "frozen install, lint, downstream bootstrap contract, and MCP contracts"
+      "macos-latest": "frozen install, lint, and 83 portable downstream bootstrap/MCP contract tests",
+      "windows-2022": "frozen install, lint, and 83 portable downstream bootstrap/MCP contract tests"
     },
     "initial_windows_latest_failure": "The 2026 windows-latest image exposed Visual Studio 18 only; node-gyp 11 could not detect that toolchain while compiling the node-pty development dependency.",
     "full_matrix_observation_run": 34256123031,
@@ -127,7 +127,9 @@
       "macOS full-suite failures were concentrated in inherited WSL simulations and PTY assumptions that do not represent the target WSL platform.",
       "Windows full-suite failures were dominated by inherited colon-bearing runtime directory names, which Windows filesystems reject."
     ],
-    "remediation": "Pin Windows to windows-2022 for its node-gyp-compatible toolchain; retain the complete suite on the target Ubuntu/WSL lane and run portable bootstrap/MCP contracts on macOS and Windows."
+    "portable_matrix_observation_run": 34257940216,
+    "portable_matrix_correction": "Exclude tests/mcp.apiOpsBrowserStatus.test.ts from the cross-platform subset because its two HTTP status cases create the same inherited colon-bearing runtime directory; the test remains in the complete Ubuntu/WSL gate.",
+    "remediation": "Pin Windows to windows-2022 for its node-gyp-compatible toolchain; retain the complete suite on the target Ubuntu/WSL lane and run 83 portable bootstrap/MCP contracts on macOS and Windows."
   },
   "remaining": [
     "owned-fork pull request and CI",
