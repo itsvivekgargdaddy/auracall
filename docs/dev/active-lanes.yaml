@@ -587,13 +587,13 @@ lanes:
     target: main
     plan_state: OPEN
     custody_state: ACTIVE_WORKTREE
-    checkpoint: 3861d28104e8a731ae172d637f299e0c50664152
-    remote_ref: null
+    checkpoint: 52e218df438d279784b38e4db99eb05ce78b5040
+    remote_ref: refs/remotes/origin/fix/plan0339-downstream-bootstrap-hardening
     integration: merge
     dependencies: [P31]
     overlaps: []
-    validation_status: audit-complete-implementation-open
-    validation_ref: null
+    validation_status: provider-free-accepted
+    validation_ref: docs/dev/notes/2026-09-08-plan0339-validation.json
     blocker: null
-    disposition: Owned-fork hardening and provider-free local installation are in progress; API service, browser, login, and prompt effects remain excluded.
+    disposition: Hardened implementation passes the provider-free release gate; owned-fork integration and local CLI/MCP adoption remain.
     updated_at: 2026-09-08
