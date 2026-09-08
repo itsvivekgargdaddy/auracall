@@ -49037,3 +49037,13 @@ Chat repair integrated. Inventory complete at 11. Blank-tab readiness fix instal
 - Durable evidence is in
   `docs/dev/notes/2026-09-08-plan0339-validation.json`. Owned-fork integration
   and provider-free local installation remain; effect boundaries are unchanged.
+
+## 2026-09-08 | Plan 0339 CI scope corrected
+
+- PR CI proved the complete release suite on Ubuntu/WSL, but also exposed that
+  inherited WSL simulations do not apply on macOS and colon-bearing runtime
+  directory IDs are not valid on native Windows.
+- CI now runs the complete 3,113-test gate on the target Ubuntu/WSL lane and an
+  85-test portable downstream-bootstrap/MCP gate on macOS and Windows, in
+  addition to frozen install and lint everywhere. No platform failure crossed
+  the provider-free effect boundary.

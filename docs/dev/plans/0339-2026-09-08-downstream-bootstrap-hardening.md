@@ -5,7 +5,7 @@ Lane: P32
 Branch: fix/plan0339-downstream-bootstrap-hardening
 Target: main
 Integration: merge
-Revision: 4 | 2026-09-08
+Revision: 5 | 2026-09-08
 
 ## Stable Objective
 
@@ -27,6 +27,11 @@ repository or activating provider/browser effects.
   3 skips, and typecheck/build/lint pass. Two inherited host-coupled fixtures
   were made portable, and the repository's documented single-worker release
   suite now passes all 3,113 tests with 65 skips.
+- Owned-fork CI keeps that complete suite as the Ubuntu/WSL acceptance gate.
+  macOS and Windows run the portable downstream-bootstrap and MCP contracts:
+  the inherited complete suite contains WSL simulations that are invalid on
+  macOS and Windows-native runtime IDs with colons that cannot be directory
+  names on Windows.
 - Owned-fork review/integration, user-scoped CLI installation, narrow Codex MCP
   registration, installed smoke checks, and final closeout remain.
 
@@ -41,8 +46,9 @@ subagents and no provider effects.
    generic runtime defaults, supported-Node WSL bootstrap behavior, CI Node
    alignment, and the bundled local CLI skill/config examples.
 3. Add or update the cheapest deterministic tests for changed installer and
-   bootstrap contracts; run focused checks, audit, typecheck, lint, build, and
-   the complete provider-free test suite.
+   bootstrap contracts; run focused checks, audit, typecheck, lint, build, the
+   complete provider-free suite on the target Linux/WSL platform, and portable
+   bootstrap/MCP contracts on macOS and Windows.
 4. Publish the validated branch, integrate it into owned `main`, verify remote
    parity, install only the user-scoped CLI runtime, and smoke-test help,
    version, dry-run, and MCP schema without login, browser launch, or prompt.
@@ -61,9 +67,9 @@ subagents and no provider effects.
 - DH4: WSL bootstrap accepts every supported Node major at or above 22,
   installs the native build prerequisites, and performs a frozen-lockfile
   install; CI tests the declared minimum Node major.
-- DH5: focused tests, the complete provider-free single-worker release suite,
-  typecheck, lint, build, planning audit, and diff hygiene pass from the frozen
-  lockfile.
+- DH5: focused tests, the complete provider-free single-worker Linux/WSL
+  release suite, portable macOS/Windows bootstrap and MCP contracts, typecheck,
+  lint, build, planning audit, and diff hygiene pass from the frozen lockfile.
 - DH6: owned remote `main` contains the accepted changes and matches the local
   integration commit; Eric's repository remains unchanged.
 - DH7: `~/.local/bin/auracall` and `auracall-mcp` resolve to the installed
@@ -90,10 +96,13 @@ evidence-driven correction is allowed before local replanning.
   `bash -n scripts/bootstrap-wsl.sh` passes.
 - DH5: MCP tests pass 73 with 3 skips; typecheck, build, and lint pass. The exact
   documented release suite (`--maxWorkers 1 --testTimeout 15000`) passes 3,113
-  tests with 65 skips across 330 passing and 21 skipped files. CI uses the same
-  deterministic command on Linux, macOS, and Windows. The Windows lane is pinned
-  to `windows-2022` because the current `windows-latest` Visual Studio 18 image
-  is not detectable by node-gyp 11. Accepted implementation checkpoint:
+  tests with 65 skips across 330 passing and 21 skipped files. CI uses that
+  deterministic full gate on Ubuntu and the portable downstream-bootstrap/MCP
+  contracts on macOS and Windows. This scope follows observed platform facts:
+  WSL simulation tests do not apply on a Darwin kernel, while Windows rejects
+  inherited colon-bearing runner directory names. The Windows lane is pinned to
+  `windows-2022` because the current `windows-latest` Visual Studio 18 image is
+  not detectable by node-gyp 11. Accepted implementation checkpoint:
   `52e218df438d279784b38e4db99eb05ce78b5040`.
 - Durable detail: `docs/dev/notes/2026-09-08-plan0339-validation.json`.
 - DH6-DH8 remain open until owned-fork integration and the provider-free local

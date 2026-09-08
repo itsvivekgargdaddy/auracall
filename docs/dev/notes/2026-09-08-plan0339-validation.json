@@ -115,8 +115,19 @@
     "workflow_id": 353338862,
     "state": "active",
     "matrix": ["ubuntu-latest", "macos-latest", "windows-2022"],
+    "validation_scope": {
+      "ubuntu-latest": "complete provider-free single-worker release suite plus build",
+      "macos-latest": "frozen install, lint, downstream bootstrap contract, and MCP contracts",
+      "windows-2022": "frozen install, lint, downstream bootstrap contract, and MCP contracts"
+    },
     "initial_windows_latest_failure": "The 2026 windows-latest image exposed Visual Studio 18 only; node-gyp 11 could not detect that toolchain while compiling the node-pty development dependency.",
-    "remediation": "Pin the Windows CI lane to windows-2022, whose supported Visual Studio toolchain is compatible with node-gyp 11."
+    "full_matrix_observation_run": 34256123031,
+    "full_matrix_observations": [
+      "Ubuntu passed the complete release suite and build.",
+      "macOS full-suite failures were concentrated in inherited WSL simulations and PTY assumptions that do not represent the target WSL platform.",
+      "Windows full-suite failures were dominated by inherited colon-bearing runtime directory names, which Windows filesystems reject."
+    ],
+    "remediation": "Pin Windows to windows-2022 for its node-gyp-compatible toolchain; retain the complete suite on the target Ubuntu/WSL lane and run portable bootstrap/MCP contracts on macOS and Windows."
   },
   "remaining": [
     "owned-fork pull request and CI",

@@ -22,6 +22,11 @@ jobs:
       - uses: pnpm/action-setup@v4
       - run: pnpm install --frozen-lockfile
       - run: pnpm run lint
-      - run: pnpm vitest run --maxWorkers 1 --testTimeout 15000
+      - name: Run full provider-free acceptance suite
+        if: runner.os == 'Linux'
+        run: pnpm vitest run --maxWorkers 1 --testTimeout 15000
+      - name: Run portable bootstrap and MCP contracts
+        if: runner.os != 'Linux'
+        run: pnpm vitest run tests/downstreamBootstrap.contract.test.ts tests/mcp --maxWorkers 1 --testTimeout 15000
       - run: pnpm run build
         if: matrix.os == 'ubuntu-latest'
