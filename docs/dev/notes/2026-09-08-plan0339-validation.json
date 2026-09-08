@@ -1,12 +1,15 @@
 {
   "plan": "0339",
-  "phase": "pre-integration",
+  "phase": "complete",
   "source_repository": "ecochran76/auracall",
   "owned_repository": "itsvivekgargdaddy/auracall",
   "source_commit": "3861d28104e8a731ae172d637f299e0c50664152",
   "source_sync_tag": "upstream/ecochran76-main-2026-09-08",
   "branch": "fix/plan0339-downstream-bootstrap-hardening",
   "implementation_commit": "52e218df438d279784b38e4db99eb05ce78b5040",
+  "pull_request": "https://github.com/itsvivekgargdaddy/auracall/pull/1",
+  "merge_commit": "1c1b774a0373fd989c4c22680ae87b256026f740",
+  "node_compatibility_commit": "d76e23fc5a8d750f33ad45f8f074ad50303493a4",
   "environment": {
     "platform": "WSL2 Ubuntu 26.04",
     "supported_validation_node": "22.23.2",
@@ -79,7 +82,7 @@
       "tests_passed": 3113,
       "tests_skipped": 65,
       "tests_failed": 0,
-      "duration_seconds": 188.38,
+      "duration_seconds": 187.33,
       "exit_code": 0
     },
     "untouched_source_reproduction": {
@@ -114,12 +117,14 @@
     "provider_calls": 0,
     "browser_launches": 0,
     "prompts_submitted": 0,
-    "api_service_started": false
+    "api_service_started": false,
+    "api_service_enabled": false,
+    "api_port_18095_listening": false
   },
   "owned_fork_ci": {
     "workflow": "CI",
     "workflow_id": 353338862,
-    "state": "active",
+    "state": "accepted",
     "matrix": ["ubuntu-latest", "macos-latest", "windows-2022"],
     "validation_scope": {
       "ubuntu-latest": "complete provider-free single-worker release suite plus build",
@@ -134,13 +139,36 @@
       "Windows full-suite failures were dominated by inherited colon-bearing runtime directory names, which Windows filesystems reject."
     ],
     "portable_matrix_observation_run": 34257940216,
+    "accepted_pull_request_run": 34258674243,
+    "accepted_merge_run": 34259215969,
+    "node_compatibility_run": 34260202252,
+    "node_compatibility_run_conclusion": "success",
     "portable_matrix_correction": "Exclude tests/mcp.apiOpsBrowserStatus.test.ts from the cross-platform subset because its two HTTP status cases create the same inherited colon-bearing runtime directory; the test remains in the complete Ubuntu/WSL gate.",
     "remediation": "Pin Windows to windows-2022 for its node-gyp-compatible toolchain; retain the complete suite on the target Ubuntu/WSL lane and run 83 portable bootstrap/MCP contracts on macOS and Windows."
   },
-  "remaining": [
-    "owned-fork pull request and CI",
-    "owned main integration and parity",
-    "user-scoped runtime and skill install",
-    "restricted Codex MCP registration and smoke checks"
-  ]
+  "local_adoption": {
+    "runtime_prefix": "/home/vgarg/.auracall/user-runtime",
+    "cli": "/home/vgarg/.local/bin/auracall",
+    "mcp": "/home/vgarg/.local/bin/auracall-mcp",
+    "package_version": "0.1.1",
+    "installed_at": "2026-09-08T17:58:24.121Z",
+    "installed_tokentally": "0.1.1",
+    "production_audit_vulnerabilities": 0,
+    "provider_free_dry_run_exit_code": 0,
+    "skill": "/home/vgarg/.codex/skills/auracall/SKILL.md",
+    "skill_sha256": "1034a49531966783f84a37a9d0e0974acd9246d39efe71112f102fa1fbacec94",
+    "codex_mcp_enabled": true,
+    "codex_mcp_default_approval": "prompt",
+    "codex_mcp_enabled_tools": [
+      "sessions",
+      "run_status",
+      "runtime_runs_recent",
+      "runtime_inspect",
+      "run_archive_search",
+      "run_archive_item",
+      "run_archive_asset_lookup"
+    ],
+    "mcp_initialize_and_tools_list_exit_code": 0
+  },
+  "remaining": []
 }

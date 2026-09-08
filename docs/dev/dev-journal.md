@@ -49058,3 +49058,17 @@ Chat repair integrated. Inventory complete at 11. Blank-tab readiness fix instal
 - The corrected frozen graph imports under Node 22 and passes typecheck, both
   audits, and all 3,113 release tests. Reinstallation from integrated main is
   still required before accepting the user runtime.
+
+## 2026-09-08 | Plan 0339 integrated and installed
+
+- Owned-fork PR 1 passed all target-aware jobs and merged only into owned
+  `main` at `1c1b774a0373fd989c4c22680ae87b256026f740`. The packaged Node-floor
+  correction is published at `d76e23fc5a8d750f33ad45f8f074ad50303493a4`;
+  CI run `34260202252` passes all three target-aware jobs, and Eric Cochran's
+  remote remains fetch-only with push disabled.
+- Reinstalled AuraCall 0.1.1 under the user prefix. The runtime carries
+  `tokentally@0.1.1`, reports zero production vulnerabilities, and passes an
+  isolated provider-free dry-run plus MCP initialize/tool discovery.
+- Installed the exact bundled skill and registered AuraCall in Codex with seven
+  read-oriented tools and prompt-on-use approval. No service, listener, browser,
+  provider request, credential use, or prompt submission occurred. P32 closes.

@@ -22395,3 +22395,11 @@ ChatGPT commits a native Skill mention before the user text. Prompt equality mus
 - Pin the last API-compatible release whose engine fits the supported floor,
   then re-run its minimum-Node import, frozen install, audits, and complete
   regression suite before replacing the installed runtime.
+
+## 2026-09-08 | Downstream adoption is read-only before provider enablement
+
+- Install the CLI and skill at user scope, then validate version, dependency
+  audit, dry-run, and MCP schema without starting a service or provider.
+- Register only session/status/archive inspection tools at first, require
+  prompt approval, and keep execution tools disabled until the operator chooses
+  a provider and explicitly authorizes its credentials and effects.

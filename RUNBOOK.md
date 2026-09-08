@@ -21090,3 +21090,17 @@ DISPLAY=:0.0 ORACLE_NO_BANNER=1 NODE_NO_WARNINGS=1 pnpm tsx bin/auracall.ts file
   typecheck, complete and production audits, and the full 3,113-test suite all
   pass. The provisional runtime will be replaced from integrated main before
   installed smoke acceptance.
+
+## Turn 432 | 2026-09-08
+
+- Owned-fork PR 1 passed target-aware CI and merged only into owned `main` at
+  `1c1b774a0373fd989c4c22680ae87b256026f740`; the Node-floor correction is
+  published at `d76e23fc5a8d750f33ad45f8f074ad50303493a4`. Upstream remains fetch-only
+  with push disabled. Its CI run `34260202252` passes Ubuntu, macOS, and Windows.
+- The corrected AuraCall 0.1.1 user runtime and exact bundled Codex skill are
+  installed. Production audit, isolated CLI dry-run, MCP initialization and
+  schema discovery all pass on the default Node 24 host; the graph remains
+  compatible with Node 22 through `tokentally@0.1.1`.
+- Codex lists the stdio server with exactly seven read-oriented tools and
+  prompt-on-use approval. No API service or port is active, and no provider,
+  browser, credential, or prompt effect occurred. Plan 0339/P32 is closed.

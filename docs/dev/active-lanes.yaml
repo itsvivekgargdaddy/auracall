@@ -582,18 +582,19 @@ lanes:
   - id: P32
     objective: Harden the owned downstream fork and install a prompt-gated local Codex MCP runtime without provider effects.
     plan: docs/dev/plans/0339-2026-09-08-downstream-bootstrap-hardening.md
-    plan_ref: refs/heads/fix/plan0339-downstream-bootstrap-hardening
+    plan_ref: refs/remotes/origin/main
     branch: fix/plan0339-downstream-bootstrap-hardening
     target: main
-    plan_state: OPEN
-    custody_state: ACTIVE_WORKTREE
-    checkpoint: 52e218df438d279784b38e4db99eb05ce78b5040
-    remote_ref: refs/remotes/origin/fix/plan0339-downstream-bootstrap-hardening
+    plan_state: CLOSED
+    custody_state: INTEGRATED
+    checkpoint: d76e23fc5a8d750f33ad45f8f074ad50303493a4
+    remote_ref: refs/remotes/origin/main
     integration: merge
     dependencies: [P31]
     overlaps: []
-    validation_status: provider-free-accepted
+    validation_status: provider-free-installed-integrated
     validation_ref: docs/dev/notes/2026-09-08-plan0339-validation.json
     blocker: null
-    disposition: Hardened implementation passes the provider-free release gate; owned-fork integration and local CLI/MCP adoption remain.
+    disposition: Hardened owned main, user-scoped CLI/skill, and prompt-gated read-only Codex MCP are installed and verified without provider effects.
     updated_at: 2026-09-08
+    integration_receipt: 1c1b774a0373fd989c4c22680ae87b256026f740

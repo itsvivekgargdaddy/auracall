@@ -1,11 +1,11 @@
 # Downstream Bootstrap Hardening | 0339-2026-09-08
 
-State: OPEN
+State: CLOSED
 Lane: P32
 Branch: fix/plan0339-downstream-bootstrap-hardening
 Target: main
 Integration: merge
-Revision: 7 | 2026-09-08
+Revision: 8 | 2026-09-08
 
 ## Stable Objective
 
@@ -37,8 +37,14 @@ repository or activating provider/browser effects.
   0.1.1 require Node 24 despite AuraCall declaring Node 22 support. The runtime
   now pins 0.1.1, whose engine is Node 20+, imports on Node 22, retains a
   zero-advisory audit, and passes the complete release suite.
-- Owned-fork review/integration, user-scoped CLI installation, narrow Codex MCP
-  registration, installed smoke checks, and final closeout remain.
+- Owned-fork PR 1 passed the target-aware matrix and merged only into the owned
+  `main` at `1c1b774a0373fd989c4c22680ae87b256026f740`. The Node-floor correction
+  is published at `d76e23fc5a8d750f33ad45f8f074ad50303493a4`.
+- The corrected user runtime and bundled skill are installed. CLI version,
+  production audit, provider-free dry-run, MCP initialization/tool discovery,
+  and Codex discovery pass. Codex exposes only seven read-oriented tools with
+  prompt-on-use approval. No API service, listener, browser, provider call,
+  credential use, or prompt submission occurred.
 
 ## Execution Graph
 
@@ -91,7 +97,7 @@ submission, API-key use, or migration of Eric's historical evidence. Do not
 alter unrelated open lanes. One dependency-remediation approach plus one
 evidence-driven correction is allowed before local replanning.
 
-## Pre-Integration Evidence
+## Acceptance Evidence
 
 - DH1: owned tag `upstream/ecochran76-main-2026-09-08` points to
   `3861d28104e8a731ae172d637f299e0c50664152`; `upstream` push is `DISABLED`.
@@ -110,10 +116,19 @@ evidence-driven correction is allowed before local replanning.
   inherited colon-bearing runner directory names. The Windows lane is pinned to
   `windows-2022` because the current `windows-latest` Visual Studio 18 image is
   not detectable by node-gyp 11. Accepted implementation checkpoint:
-  `52e218df438d279784b38e4db99eb05ce78b5040`.
+  `52e218df438d279784b38e4db99eb05ce78b5040`. Owned-fork PR CI run
+  `34258674243`, merge CI run `34259215969`, and Node-correction CI run
+  `34260202252` passed all target-aware jobs.
 - Durable detail: `docs/dev/notes/2026-09-08-plan0339-validation.json`.
-- DH6-DH8 remain open until owned-fork integration and the provider-free local
-  install/configuration checks complete.
+- DH6: owned `main` contains merge `1c1b774a0373fd989c4c22680ae87b256026f740`
+  and Node correction `d76e23fc5a8d750f33ad45f8f074ad50303493a4`;
+  the upstream push URL remains `DISABLED` and no source-repository write ran.
+- DH7: installed `auracall` and `auracall-mcp` resolve under
+  `/home/vgarg/.local/bin`; version 0.1.1, `tokentally@0.1.1`, a zero-finding
+  production audit, and an isolated provider-free dry-run pass.
+- DH8: `codex mcp list/get` reports the enabled stdio server with exactly seven
+  read-oriented tools and `default_tools_approval_mode = "prompt"`; an isolated
+  MCP initialization and `tools/list` round trip passes.
 
 ## Definition Of Done
 
