@@ -21080,3 +21080,13 @@ DISPLAY=:0.0 ORACLE_NO_BANNER=1 NODE_NO_WARNINGS=1 pnpm tsx bin/auracall.ts file
   colon-bearing directory; they remain covered by the complete Linux gate and
   are excluded only from the cross-platform subset. Plan audit remains at zero
   errors.
+
+## Turn 431 | 2026-09-08
+
+- The first packaged user-runtime install succeeded but reported that
+  `tokentally@0.1.6` requires Node 24, contradicting AuraCall's Node 22 floor.
+- Revision 7 pins `tokentally@0.1.1`, the latest release whose declared engine
+  remains compatible with Node 22. Its Node-22 import, frozen install,
+  typecheck, complete and production audits, and the full 3,113-test suite all
+  pass. The provisional runtime will be replaced from integrated main before
+  installed smoke acceptance.

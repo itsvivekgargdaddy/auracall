@@ -22385,3 +22385,13 @@ ChatGPT commits a native Skill mention before the user text. Prompt equality mus
 - Treat provider-free CLI/MCP installation separately from browser, API,
   credential, service, and prompt effects. Start Codex with an explicit
   read-oriented MCP tool allowlist and prompt-on-use approval.
+
+## 2026-09-08 | Declared Node support includes production dependency engines
+
+- A project-level `node >=22` declaration is not sufficient when a production
+  dependency resolves to a release declaring Node 24. Package-manager engine
+  warnings during the packaged-runtime install are acceptance failures, even
+  when source tests happen to pass.
+- Pin the last API-compatible release whose engine fits the supported floor,
+  then re-run its minimum-Node import, frozen install, audits, and complete
+  regression suite before replacing the installed runtime.

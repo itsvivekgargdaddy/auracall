@@ -86,8 +86,8 @@ importers:
         specifier: ^10.1.0
         version: 10.1.0
       tokentally:
-        specifier: ^0.1.6
-        version: 0.1.6
+        specifier: 0.1.1
+        version: 0.1.1
       zod:
         specifier: ^4.5.4
         version: 4.5.4
@@ -2197,9 +2197,9 @@ packages:
     resolution: {integrity: sha512-o5sSPKEkg/DIQNmH43V0/uerLrpzVedkUh8tGNvaeXpfpuwjKenlSox/2O/BTlZUtEe+JG7s5YhEz608PlAHRA==}
     engines: {node: '>=0.6'}
 
-  tokentally@0.1.6:
-    resolution: {integrity: sha512-cJG1NZfQ4YstYQAMwIdQj+1IHEzpDrtoS8yex+xsazcF6G2sN9wpWkvWpu2clSsSfgZkY2jXg8AHECYfXxC4Eg==}
-    engines: {node: '>=24'}
+  tokentally@0.1.1:
+    resolution: {integrity: sha512-z1e4nTJe8/PWSoWCQmPMX5LoOWDVfj9IQ+rTChQcXrxYNhDxxjqloYSmOjnClyRdnTrawS+YNDfrk7bNuzsVKQ==}
+    engines: {node: '>=20'}
 
   trim-lines@3.0.1:
     resolution: {integrity: sha512-kRj8B+YHZCc9kQYdWfJB2/oUl9rA99qbowYYBtr4ui4mZyAQ2JpvVBd/6U2YloATfqBhBTSMhTpgBHtU0Mf3Rg==}
@@ -4566,7 +4566,7 @@ snapshots:
 
   toidentifier@1.0.1: {}
 
-  tokentally@0.1.6: {}
+  tokentally@0.1.1: {}
 
   trim-lines@3.0.1: {}
 

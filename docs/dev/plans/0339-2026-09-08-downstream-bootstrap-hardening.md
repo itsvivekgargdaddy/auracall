@@ -5,7 +5,7 @@ Lane: P32
 Branch: fix/plan0339-downstream-bootstrap-hardening
 Target: main
 Integration: merge
-Revision: 6 | 2026-09-08
+Revision: 7 | 2026-09-08
 
 ## Stable Objective
 
@@ -33,6 +33,10 @@ repository or activating provider/browser effects.
   macOS and Windows-native runtime IDs with colons that cannot be directory
   names on Windows. The portable subset excludes the one MCP API-operations
   status test that creates the same unsupported Windows runtime directory.
+- The first packaged user install exposed that `tokentally` releases after
+  0.1.1 require Node 24 despite AuraCall declaring Node 22 support. The runtime
+  now pins 0.1.1, whose engine is Node 20+, imports on Node 22, retains a
+  zero-advisory audit, and passes the complete release suite.
 - Owned-fork review/integration, user-scoped CLI installation, narrow Codex MCP
   registration, installed smoke checks, and final closeout remain.
 
@@ -67,7 +71,8 @@ subagents and no provider effects.
   installed `auracall` CLI rather than `@steipete/oracle` or unpublished npm.
 - DH4: WSL bootstrap accepts every supported Node major at or above 22,
   installs the native build prerequisites, and performs a frozen-lockfile
-  install; CI tests the declared minimum Node major.
+  install; CI tests the declared minimum Node major, and the production
+  dependency graph does not declare a higher minimum.
 - DH5: focused tests, the complete provider-free single-worker Linux/WSL
   release suite, portable macOS/Windows bootstrap and MCP contracts, typecheck,
   lint, build, planning audit, and diff hygiene pass from the frozen lockfile.
@@ -94,7 +99,8 @@ evidence-driven correction is allowed before local replanning.
   the untouched production baseline was 1 critical, 29 high, 39 moderate, and
   5 low advisories.
 - DH3-DH4: `tests/downstreamBootstrap.contract.test.ts` passes all three tests;
-  `bash -n scripts/bootstrap-wsl.sh` passes.
+  `bash -n scripts/bootstrap-wsl.sh` passes. Pinned `tokentally@0.1.1` declares
+  Node 20+ and imports successfully under Node 22.23.2.
 - DH5: MCP tests pass 73 with 3 skips; typecheck, build, and lint pass. The exact
   documented release suite (`--maxWorkers 1 --testTimeout 15000`) passes 3,113
   tests with 65 skips across 330 passing and 21 skipped files. CI uses that

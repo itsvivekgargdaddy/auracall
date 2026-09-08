@@ -49049,3 +49049,12 @@ Chat repair integrated. Inventory complete at 11. Blank-tab readiness fix instal
   excludes one two-case MCP HTTP status test that creates the same unsupported
   colon-bearing Windows directory; it remains in the Linux gate. No platform
   failure crossed the provider-free effect boundary.
+
+## 2026-09-08 | Plan 0339 Node floor reconciled
+
+- Packaged installation exposed `tokentally@0.1.6`'s Node 24 engine against
+  AuraCall's declared Node 22 floor. Pinning 0.1.1 restores declared Node 22
+  compatibility without advisories.
+- The corrected frozen graph imports under Node 22 and passes typecheck, both
+  audits, and all 3,113 release tests. Reinstallation from integrated main is
+  still required before accepting the user runtime.
