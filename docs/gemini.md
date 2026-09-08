@@ -250,7 +250,7 @@ Notes:
   - Gemini conversation cache identity now falls back to the managed browser
     profile's Google-account state when a live page label is unavailable
   - live cache files now write under:
-    - `~/.auracall/cache/providers/gemini/ecochran76@gmail.com/`
+    - `~/.auracall/cache/providers/gemini/<account-email>/`
   - current live Canvas proof on `default`:
     - `auracall conversations context get 59b6f9ac9e510adc --target gemini --profile default --refresh --json-only`
     - returns:
@@ -301,7 +301,7 @@ Notes:
       - drawer rows via `--class-includes toolbox-drawer-item-list-button --role menuitemcheckbox`
       - `Personal Intelligence` via `--aria-label "Personal Intelligence" --role switch`
 - The earlier raw Gemini upload protocol investigation is still preserved in:
-  - [gemini-native-upload-investigation.md](/home/ecochran76/workspace.local/auracall/docs/dev/gemini-native-upload-investigation.md)
+  - [gemini-native-upload-investigation.md](dev/gemini-native-upload-investigation.md)
   - but it is now background context, not the default path for ordinary Gemini
     browser uploads
 

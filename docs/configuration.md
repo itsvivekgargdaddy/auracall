@@ -119,16 +119,16 @@ dashboard URLs:
     host: "127.0.0.1",
     port: 18095,
     dashboardUrl: "http://auracall.localhost/ops/browser",
-    publicDashboardUrl: "https://auracall.ecochran.dyndns.org/ops/browser",
+    publicDashboardUrl: "https://auracall.example.com/ops/browser",
     accountMirrorScheduler: {
       intervalMs: 600000,
       execute: true,
     },
     routing: {
       localHostname: "auracall.localhost",
-      externalHostname: "auracall.ecochran.dyndns.org",
+      externalHostname: "auracall.example.com",
       localBaseUrl: "http://auracall.localhost",
-      externalBaseUrl: "https://auracall.ecochran.dyndns.org",
+      externalBaseUrl: "https://auracall.example.com",
       dashboardPath: "/ops/browser",
       accountMirrorPath: "/account-mirror",
       proxyTarget: "http://127.0.0.1:18095",
@@ -199,7 +199,7 @@ Use `auracall config doctor` when you want bridge-health checks instead:
 For future troubleshooting of bridge-shape vs target-shape vs mixed-shape
 configs, see:
 
-- [config-shape-troubleshooting.md](/home/ecochran76/workspace.local/auracall/docs/dev/config-shape-troubleshooting.md)
+- [config-shape-troubleshooting.md](dev/config-shape-troubleshooting.md)
 
 ## Terminology
 
@@ -267,13 +267,13 @@ auracall --profile wsl-chrome-3 apps --target chatgpt create \
   --server-url "https://example.test/mcp" \
   --auth oauth \
   --connection server-url \
-  --expected-account eric.cochran@soylei.com \
+  --expected-account <chatgpt-email> \
   --yes --json
 ```
 
 Target-model note:
 - the preferred public shape is documented in
-  [config-model-target-shape.md](/home/ecochran76/workspace.local/auracall/docs/dev/config-model-target-shape.md)
+  [config-model-target-shape.md](dev/config-model-target-shape.md)
   and uses:
   - `version: 3`
   - `defaultRuntimeProfile`

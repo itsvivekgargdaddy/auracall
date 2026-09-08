@@ -135,7 +135,7 @@ function run(command: string, args: string[], dryRun: boolean): void {
 function createUnit(options: InstallServiceOptions): string {
   return `[Unit]
 Description=AuraCall local API service
-Documentation=https://github.com/ecochran76/auracall
+Documentation=https://github.com/itsvivekgargdaddy/auracall
 After=default.target
 
 [Service]
@@ -162,7 +162,8 @@ AURACALL_API_AUTH_REQUIRED=1
 AURACALL_API_KEY_ID=local-agent
 AURACALL_API_KEY=${secret}
 AURACALL_BASE_URL=http://127.0.0.1:18095/v1
-AURACALL_MODEL=agent:instant-chatgpt-ecochran76
+# Replace this fail-closed placeholder with agent:<configured-agent-id> before use.
+AURACALL_MODEL=agent:replace-me
 OPENAI_BASE_URL=http://127.0.0.1:18095/v1
 OPENAI_API_KEY=${secret}
 `;

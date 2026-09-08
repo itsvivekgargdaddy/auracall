@@ -113,15 +113,17 @@ AURACALL_API_AUTH_REQUIRED=1
 AURACALL_API_KEY_ID=local-agent
 AURACALL_API_KEY=...
 AURACALL_BASE_URL=http://127.0.0.1:18095/v1
-AURACALL_MODEL=agent:instant-chatgpt-ecochran76
+# Replace with agent:<configured-agent-id> before using the client defaults.
+AURACALL_MODEL=agent:replace-me
 OPENAI_BASE_URL=http://127.0.0.1:18095/v1
 OPENAI_API_KEY=...
 ```
 
-Other local agents can load this file directly and call the AuraCall API with
-the standard OpenAI client knobs. Keep the file outside the repo; rotate it by
-editing or deleting `~/.auracall/api.env` and reinstalling/restarting the user
-API service.
+Other local agents can load this file after replacing the fail-closed model
+placeholder with an agent that exists in the effective registry, then call the
+AuraCall API with the standard OpenAI client knobs. Keep the file outside the
+repo; rotate it by editing or deleting `~/.auracall/api.env` and
+reinstalling/restarting the user API service.
 
 Privileged local MCP operators can also issue additional scoped keys with
 `api_key_issue`. The tool appends `AURACALL_API_KEY_IDS` plus matching

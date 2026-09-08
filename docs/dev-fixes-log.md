@@ -22372,3 +22372,16 @@ ChatGPT commits a native Skill mention before the user text. Prompt equality mus
 - Preserve omitted and explicit-model handoff cases together. Validation must
   use frozen-lockfile dependencies: stale shared OpenAI 6.15.0 dependencies
   produced unrelated errors against current source requiring 7.10.0.
+
+## 2026-09-08 | Downstream installation must fail closed and preserve fork custody
+
+- A copied operational repository can retain vulnerable transitive packages,
+  malformed licensing, source-maintainer identities, unpublished package
+  commands, and bootstrap assumptions that are unsafe on a new host.
+- Preserve an exact upstream sync tag and a fetch-only upstream remote, make
+  all active defaults operator-neutral, use a deliberately invalid agent
+  placeholder, test the declared minimum Node release, and install from the
+  frozen lockfile with native build prerequisites.
+- Treat provider-free CLI/MCP installation separately from browser, API,
+  credential, service, and prompt effects. Start Codex with an explicit
+  read-oriented MCP tool allowlist and prompt-on-use approval.

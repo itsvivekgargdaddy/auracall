@@ -60,9 +60,9 @@ config. Prefer:
 Examples:
 
 ```text
-instant-chatgpt-ecochran76
-pro-extended-chatgpt-soylei
-pro-extended-chatgpt-soylei-che4470-seminar-grading
+instant-chatgpt-researcher
+reasoning-high-chatgpt-research-team
+reasoning-high-chatgpt-research-team-literature-review
 thinking-standard-chatgpt-consult-review
 instant-gemini-default
 instant-grok-default
@@ -301,12 +301,12 @@ When a setup agent can create the project-bound agent and key in one call, use
 {
   "service": "chatgpt",
   "runtimeProfile": "wsl-chrome-3",
-  "projectName": "ChE 4470/5470 Seminar Grading",
-  "agentId": "pro-extended-chatgpt-soylei-che4470-seminar-grading",
+  "projectName": "Literature Review",
+  "agentId": "reasoning-high-chatgpt-research-team-literature-review",
   "agentModelSelector": "chatgpt:reasoning-high",
-  "keyId": "che447-grading-client",
-  "envPath": "/home/ecochran76/.auracall/api.env",
-  "clientEnvPath": "/home/ecochran76/.auracall/clients/che447-grading.env"
+  "keyId": "literature-review-client",
+  "envPath": "/home/you/.auracall/api.env",
+  "clientEnvPath": "/home/you/.auracall/clients/literature-review.env"
 }
 ```
 
@@ -315,12 +315,12 @@ write the downstream handoff:
 
 ```json
 {
-  "agentId": "pro-extended-chatgpt-soylei-che4470-seminar-grading",
-  "keyId": "che447-grading-client",
+  "agentId": "reasoning-high-chatgpt-research-team-literature-review",
+  "keyId": "literature-review-client",
   "services": ["chatgpt"],
   "runtimeProfiles": ["wsl-chrome-3"],
-  "envPath": "/home/ecochran76/.auracall/api.env",
-  "clientEnvPath": "/home/ecochran76/.auracall/clients/che447-grading.env"
+  "envPath": "/home/you/.auracall/api.env",
+  "clientEnvPath": "/home/you/.auracall/clients/literature-review.env"
 }
 ```
 
@@ -334,7 +334,7 @@ A setup agent should hand an execution agent only the fields it needs:
 ```env
 OPENAI_BASE_URL=http://auracall.localhost/v1
 OPENAI_API_KEY=<scoped key>
-AURACALL_MODEL=agent:pro-extended-chatgpt-soylei-che4470-seminar-grading
+AURACALL_MODEL=agent:reasoning-high-chatgpt-research-team-literature-review
 AURACALL_STATUS_URL=http://auracall.localhost/status
 AURACALL_BATCH_URL=http://auracall.localhost/v1/response-batches
 ```

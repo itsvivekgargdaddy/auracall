@@ -5,8 +5,8 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/ecochran76/auracall/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/ecochran76/auracall/ci.yml?branch=main&style=for-the-badge&label=tests" alt="CI Status"></a>
-  <a href="https://github.com/ecochran76/auracall"><img src="https://img.shields.io/badge/platforms-macOS%20%7C%20Linux%20%7C%20Windows-blue?style=for-the-badge" alt="Platforms"></a>
+  <a href="https://github.com/itsvivekgargdaddy/auracall/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/itsvivekgargdaddy/auracall/ci.yml?branch=main&style=for-the-badge&label=tests" alt="CI Status"></a>
+  <a href="https://github.com/itsvivekgargdaddy/auracall"><img src="https://img.shields.io/badge/platforms-macOS%20%7C%20Linux%20%7C%20Windows-blue?style=for-the-badge" alt="Platforms"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-green?style=for-the-badge" alt="MIT License"></a>
 </p>
 
@@ -19,6 +19,9 @@ checkout into `~/.auracall/user-runtime` and writes user-owned wrappers under
 `~/.local/bin`; see `docs/user-scoped-runtime.md`.
 Public npm distribution is intentionally deferred; `auracall` is not currently
 offered through npm or Homebrew.
+
+For this fork's safe local architecture, installed paths, provider-free first
+use, and opt-in boundaries, see [`docs/downstream-setup.md`](docs/downstream-setup.md).
 
 Requires Node 22+.
 
@@ -137,7 +140,7 @@ auracall --profile wsl-chrome-3 apps --target chatgpt list --json
 # Inventory auth status requires one exact app-id/connector-id match; a
 # same-name older connector never supplies auth state to a replacement app.
 auracall --profile wsl-chrome-3 apps --target chatgpt test Corel33t \
-  --expected-account eric.cochran@soylei.com --json
+  --expected-account <chatgpt-email> --json
 # Create, refresh, submitted tests, and uninstall require --expected-account
 # plus --yes. OAuth, MFA, consent, CAPTCHA, and verification remain human gates.
 # `awaiting-human` is emitted only after AuraCall observes a fresh OAuth or
@@ -148,7 +151,7 @@ auracall --profile wsl-chrome-3 apps --target chatgpt test Corel33t \
 # navigating away for inventory proof.
 auracall --profile wsl-chrome-3 apps --target chatgpt refresh Corel33t \
   --server-url https://litscout.example.test/mcp \
-  --expected-account eric.cochran@soylei.com --yes
+  --expected-account <chatgpt-email> --yes
 # Refresh is replacement semantics: validate the full recreation input, delete
 # the exact private development app, prove its old identity/name absent, then
 # recreate it once. ChatGPT Delete may execute without a second confirmation.
@@ -194,13 +197,13 @@ curl -H "Authorization: Bearer <key>" http://auracall.localhost/v1/models
 curl -s http://auracall.localhost/v1/responses \
   -H "Authorization: Bearer <key>" \
   -H "Content-Type: application/json" \
-  -d '{"model":"agent:instant-chatgpt-ecochran76","input":"Summarize the attached runbook."}'
+  -d '{"model":"agent:researcher","input":"Summarize the attached runbook."}'
 
 # Enqueue many independent jobs as a nonblocking response batch
 curl -s http://auracall.localhost/v1/response-batches \
   -H "Authorization: Bearer <key>" \
   -H "Content-Type: application/json" \
-  -d '{"limits":{"maxConcurrentRuns":1,"maxBrowserInteractionsPerMinute":8},"requests":[{"model":"agent:instant-chatgpt-ecochran76","input":"Job 1"},{"model":"agent:instant-chatgpt-ecochran76","input":"Job 2"}]}'
+  -d '{"limits":{"maxConcurrentRuns":1,"maxBrowserInteractionsPerMinute":8},"requests":[{"model":"agent:researcher","input":"Job 1"},{"model":"agent:researcher","input":"Job 2"}]}'
 
 # Privileged setup for a project-bound tenant-pool team. AuraCall ensures each
 # member project/agent and creates the dispatch-pool team only when missing.
@@ -258,16 +261,16 @@ auracall handoff prepare \
   --source-materialization-job-id hmj_existing \
   --dry-run --json
 auracall handoff status <handoff_id> --json
-auracall handoff approve-upload <handoff_id> --actor ecochran76 --package-digest <digest>
+auracall handoff approve-upload <handoff_id> --actor operator --package-digest <digest>
 # Deterministic packet-adapter execution:
 auracall handoff upload <handoff_id> --json
-auracall handoff approve-submit <handoff_id> --actor ecochran76 --package-digest <digest>
+auracall handoff approve-submit <handoff_id> --actor operator --package-digest <digest>
 auracall handoff submit <handoff_id> --json
 # Provider-native ChatGPT execution uses a fresh packet and recover-live for
 # each approved stage; a packet-adapter completion cannot later be promoted live.
-auracall handoff approve-upload <fresh_handoff_id> --actor ecochran76 --package-digest <digest>
+auracall handoff approve-upload <fresh_handoff_id> --actor operator --package-digest <digest>
 auracall handoff recover-live <fresh_handoff_id> --target-adapter chatgpt-browser --json
-auracall handoff approve-submit <fresh_handoff_id> --actor ecochran76 --package-digest <digest>
+auracall handoff approve-submit <fresh_handoff_id> --actor operator --package-digest <digest>
 auracall handoff recover-live <fresh_handoff_id> --target-adapter chatgpt-browser --json
 auracall handoff resume <handoff_id> --json
 auracall handoff repair <handoff_id> --json
@@ -1858,14 +1861,14 @@ Terminology note:
 - AGENTS.md/CLAUDE.md:
   ```
   - Aura-Call bundles a prompt plus the right files so another AI (GPT 5 Pro + more) can answer. Use when stuck/bugs/reviewing.
-  - Run `npx -y auracall --help` once per session before first use.
+  - Run `auracall --help` once per session before first use.
   ```
 - Tip: set `browser.chatgptUrl` in config (or `--chatgpt-url`) to a dedicated ChatGPT project folder so browser runs don’t clutter your main history.
 
 **Codex skill**
 - Copy the bundled skill from this repo to your Codex skills folder:
   - `mkdir -p ~/.codex/skills`
-  - `cp -R skills/oracle ~/.codex/skills/oracle`
+  - `cp -R skills/oracle ~/.codex/skills/auracall`
 - Then reference it in your `AGENTS.md`/`CLAUDE.md` so Codex loads it.
 
 **MCP**
@@ -1886,10 +1889,11 @@ Terminology note:
   `media_generation_status`. Status tools read durable local records and should
   not be replaced with a second create call just to check progress.
 ```bash
-npx -y auracall auracall-mcp
+auracall-mcp
 ```
-- Cursor setup (MCP): drop a `.cursor/mcp.json` like below, then pick “oracle” in Cursor’s MCP sources. See https://cursor.com/docs/context/mcp for UI steps.
-[![Install MCP Server](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en-US/install-mcp?name=oracle&config=eyJjb21tYW5kIjoibnB4IC15IEBzdGVpcGV0ZS9vcmFjbGUgb3JhY2xlLW1jcCJ9)
+- Cursor setup (MCP): drop a `.cursor/mcp.json` like below, then pick
+  `auracall` in Cursor's MCP sources. See https://cursor.com/docs/context/mcp
+  for UI steps.
 
 ```json
 {
@@ -2084,14 +2088,14 @@ auracall teams run auracall-multi-agent "Reply exactly with: OK" --max-turns 2 -
 auracall teams run auracall-tooling "Run one bounded node local shell action, then reply exactly with: OK" \
   --max-turns 2 \
   --allow-local-shell-command node \
-  --allow-local-cwd-root /home/ecochran76/workspace.local/auracall \
+  --allow-local-cwd-root /path/to/auracall \
   --json
 
 # Require operator approval/cancellation before the bounded local action can proceed
 auracall teams run auracall-tooling "Request one bounded node local shell action, then wait for operator approval/cancellation" \
   --max-turns 2 \
   --allow-local-shell-command node \
-  --allow-local-cwd-root /home/ecochran76/workspace.local/auracall \
+  --allow-local-cwd-root /path/to/auracall \
   --require-local-action-approval \
   --json
 
@@ -2172,9 +2176,9 @@ Current boundary:
 - The current multi-agent live target is:
   - `auracall teams run auracall-multi-agent "Reply exactly with: AURACALL_MULTI_AGENT_LIVE_SMOKE_OK" --title "AuraCall multi-agent team live smoke" --prompt-append "Do not use tools. Reply with exactly AURACALL_MULTI_AGENT_LIVE_SMOKE_OK and nothing else." --max-turns 2 --json`
 - The current bounded tooling live target is:
-  - `auracall teams run auracall-tooling "Run one bounded node local shell action that emits AURACALL_TOOL_ACTION_OK, then reply exactly with: AURACALL_TOOL_TEAM_LIVE_SMOKE_OK" --title "AuraCall tooling team live smoke" --prompt-append "For the tool envelope, use a top-level localActionRequests array with exactly one shell action. Preserve the provided toolEnvelope unchanged. Use kind \"shell\" and command \"node\". Use args [\"-e\",\"process.stdout.write('AURACALL_TOOL_ACTION_OK')\"]. Use structuredPayload {\"cwd\":\"/home/ecochran76/workspace.local/auracall\"}. After the local action succeeds, the final answer must be exactly AURACALL_TOOL_TEAM_LIVE_SMOKE_OK." --max-turns 2 --allow-local-shell-command node --allow-local-cwd-root /home/ecochran76/workspace.local/auracall --json`
+  - `auracall teams run auracall-tooling "Run one bounded node local shell action that emits AURACALL_TOOL_ACTION_OK, then reply exactly with: AURACALL_TOOL_TEAM_LIVE_SMOKE_OK" --title "AuraCall tooling team live smoke" --prompt-append "For the tool envelope, use a top-level localActionRequests array with exactly one shell action. Preserve the provided toolEnvelope unchanged. Use kind \"shell\" and command \"node\". Use args [\"-e\",\"process.stdout.write('AURACALL_TOOL_ACTION_OK')\"]. Use structuredPayload {\"cwd\":\"/path/to/auracall\"}. After the local action succeeds, the final answer must be exactly AURACALL_TOOL_TEAM_LIVE_SMOKE_OK." --max-turns 2 --allow-local-shell-command node --allow-local-cwd-root /path/to/auracall --json`
 - Gemini-bound team experimentation is now also live on the same stored-step seam:
-  - `auracall teams run auracall-gemini-tooling "Use the provided toolEnvelope structured context to request one bounded shell action, then use the resulting tool outcome to return the provided finalToken exactly." --title "AuraCall Gemini tooling team live smoke" --prompt-append "Requester must emit exactly one JSON object with top-level localActionRequests containing the provided toolEnvelope unchanged. Do not rename fields, add markdown fences, or add prose. Finisher must output only the final token after a successful executed tool outcome." --structured-context-json '{"toolEnvelope":{"kind":"shell","summary":"Run one bounded deterministic node command","command":"node","args":["-e","process.stdout.write('\''AURACALL_TOOL_ACTION_OK'\'')"],"structuredPayload":{"cwd":"/home/ecochran76/workspace.local/auracall"}},"finalToken":"AURACALL_GEMINI_TOOL_TEAM_SMOKE_OK"}' --max-turns 2 --allow-local-shell-command node --allow-local-cwd-root /home/ecochran76/workspace.local/auracall --json`
+  - `auracall teams run auracall-gemini-tooling "Use the provided toolEnvelope structured context to request one bounded shell action, then use the resulting tool outcome to return the provided finalToken exactly." --title "AuraCall Gemini tooling team live smoke" --prompt-append "Requester must emit exactly one JSON object with top-level localActionRequests containing the provided toolEnvelope unchanged. Do not rename fields, add markdown fences, or add prose. Finisher must output only the final token after a successful executed tool outcome." --structured-context-json '{"toolEnvelope":{"kind":"shell","summary":"Run one bounded deterministic node command","command":"node","args":["-e","process.stdout.write('\''AURACALL_TOOL_ACTION_OK'\'')"],"structuredPayload":{"cwd":"/path/to/auracall"}},"finalToken":"AURACALL_GEMINI_TOOL_TEAM_SMOKE_OK"}' --max-turns 2 --allow-local-shell-command node --allow-local-cwd-root /path/to/auracall --json`
   - on this WSL Chrome pairing, stored Gemini team execution may need exported cookies first:
     - `pnpm tsx bin/auracall.ts login --target gemini --profile auracall-gemini-pro --export-cookies`
   - stored Gemini team execution now reuses the same scoped/home exported-cookie fallback as direct Gemini browser mode when Linux keyring cookie reads return no Google auth cookies

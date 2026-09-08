@@ -21037,3 +21037,19 @@ DISPLAY=:0.0 ORACLE_NO_BANNER=1 NODE_NO_WARNINGS=1 pnpm tsx bin/auracall.ts file
   may publish to the owned fork, install the user CLI, and register a narrow
   prompt-gated MCP server. API service, browser, login, and prompt effects are
   excluded.
+
+## Turn 429 | 2026-09-08
+
+- Plan 0339 remediation reduces the untouched production audit from
+  1 critical/29 high/39 moderate/5 low and the complete audit from
+  2 critical/41 high/46 moderate/5 low to zero advisories.
+- Downstream metadata and active examples are operator-neutral; the service
+  template fails closed, the WSL bootstrap accepts Node 22+, installs native
+  prerequisites, and uses the frozen lockfile; CI now tests Node 22.
+- Three downstream contract tests and 73 MCP tests pass with typecheck, build,
+  and lint. Two exact-source failures were host-coupled fixtures; their portable
+  corrections pass all eight affected tests. The documented single-worker
+  release suite passes all 3,113 tests with 65 skips, and CI now uses that gate.
+- Publication, user-runtime/skill installation, narrow prompt-gated Codex MCP
+  registration, and final provider-free smoke evidence remain. No provider,
+  browser, service, credential, or prompt effect has occurred.

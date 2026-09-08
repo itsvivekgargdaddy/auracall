@@ -137,7 +137,7 @@ first supported action kind is `shell`:
   "command": "pnpm",
   "args": ["vitest", "run", "tests/runtime.stepOutputContract.test.ts"],
   "structuredPayload": {
-    "cwd": "/home/ecochran76/workspace.local/auracall"
+    "cwd": "/path/to/auracall"
   },
   "notes": []
 }

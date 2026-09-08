@@ -1,6 +1,8 @@
 # MCP Smoke Tests (local auracall-mcp)
 
-Use these steps to validate CLI + MCP end-to-end before releasing. The npm package now ships `auracall-mcp`, but the local build remains the fastest path for development (see the `auracall-local` entry in `config/mcporter.json`).
+Use these steps to validate CLI + MCP end-to-end before releasing. Public npm
+distribution is deferred, so use the installed user runtime or the local build
+(see the `auracall` and `auracall-local` entries in `config/mcporter.json`).
 
 ## Checklist (run all four lanes)
 1) CLI (API engine)
@@ -11,8 +13,9 @@ Use these steps to validate CLI + MCP end-to-end before releasing. The npm packa
 Shared prereqs
 - `pnpm build` (ensures `dist/bin/auracall-mcp.js` exists)
 - `OPENAI_API_KEY` set in env
-- `config/mcporter.json` contains the `oracle` entry pointing to `npx -y @steipete/oracle auracall-mcp` (already committed).
-- mcporter available at `/Users/steipete/Library/pnpm/global/5/node_modules/.bin/mcporter`
+- `config/mcporter.json` contains an `auracall` entry pointing to the installed
+  `auracall-mcp` wrapper and an `auracall-local` entry pointing to the build.
+- `mcporter` is available on `PATH`.
 - For browser runs: Chrome installed; macOS host (headful).
 - macOS notifications: `vendor/oracle-notifier/OracleNotifier.app` ships with the package (preferred); falls back to toasted-notifier if missing/broken.
 
@@ -131,12 +134,12 @@ Prereqs
 - `pnpm build`
 - `OPENAI_API_KEY` exported (for the API engine default)
 - Aura-Call MCP registered with Claude (once per project):  
-  `claude mcp add --transport stdio oracle -- auracall-mcp`
+  `claude mcp add --transport stdio auracall -- auracall-mcp`
 
 Steps
 1) Start Claude in tmux:
    ```bash
-   tmux new -s claude-smoke 'cd /Users/steipete/Projects/oracle && OPENAI_API_KEY=$OPENAI_API_KEY claude --permission-mode bypassPermissions --mcp-config ~/.mcp/oracle.json'
+   tmux new -s claude-smoke 'cd /path/to/auracall && OPENAI_API_KEY=$OPENAI_API_KEY claude --permission-mode bypassPermissions --mcp-config ~/.mcp/auracall.json'
    ```
 2) From another shell, use the helper to drive it:
    ```bash

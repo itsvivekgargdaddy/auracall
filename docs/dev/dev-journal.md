@@ -49023,3 +49023,17 @@ Chat repair integrated. Inventory complete at 11. Blank-tab readiness fix instal
   provider-free lane, publish only to the owned fork, install the CLI runtime,
   and register a prompt-gated narrow Codex MCP server. No service, browser,
   login, provider call, or prompt is authorized.
+
+## 2026-09-08 | Plan 0339 provider-free hardening validated
+
+- Complete and production dependency audits now report zero advisories. The
+  active downstream docs, package metadata, license, service default, local MCP
+  launch examples, bundled skill, WSL bootstrap, and CI minimum Node version
+  are repaired.
+- The downstream contract passes 3 tests and MCP coverage passes 73 with
+  3 skips. Typecheck, build, and lint pass. Two exact-source failures were
+  corrected as host-portable fixtures, and the documented single-worker release
+  suite passes all 3,113 tests with 65 skips. CI now uses the same stable gate.
+- Durable evidence is in
+  `docs/dev/notes/2026-09-08-plan0339-validation.json`. Owned-fork integration
+  and provider-free local installation remain; effect boundaries are unchanged.

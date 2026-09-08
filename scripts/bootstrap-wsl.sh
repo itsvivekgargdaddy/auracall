@@ -12,20 +12,27 @@ fi
 
 log "Installing base packages..."
 sudo apt-get update
-sudo apt-get install -y curl wget gnupg ca-certificates
+sudo apt-get install -y build-essential pkg-config curl wget gnupg ca-certificates
 
-if ! command -v node >/dev/null 2>&1 || [[ "$(node -v | sed 's/^v//')" != 22.* ]]; then
+node_major=0
+if command -v node >/dev/null 2>&1; then
+  node_major="$(node -p 'Number(process.versions.node.split(".")[0])' 2>/dev/null || printf '0')"
+fi
+
+if (( node_major < 22 )); then
   log "Installing Node.js 22 (NodeSource)..."
   curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
   sudo apt-get install -y nodejs
 else
-  log "Node.js 22 already installed."
+  log "Node.js $(node -v) satisfies the supported >=22 range."
 fi
 
-if command -v corepack >/dev/null 2>&1; then
-  log "Enabling corepack..."
-  corepack enable
+if ! command -v corepack >/dev/null 2>&1; then
+  log "corepack is required to use the package-manager version pinned by this repo."
+  exit 1
 fi
+log "Enabling corepack..."
+corepack enable
 
 if ! command -v google-chrome >/dev/null 2>&1; then
   log "Installing Google Chrome (WSL native)..."
@@ -42,11 +49,11 @@ fi
 
 if [[ -f package.json ]]; then
   log "Installing repo dependencies..."
-  pnpm install
+  pnpm install --frozen-lockfile
 else
   log "package.json not found; run this script from the repo root."
 fi
 
 log "Done. Next steps:"
 log "  - Set AURACALL_BROWSER_REMOTE_DEBUG_HOST=127.0.0.1 in ~/.zshrc"
-log "  - Run: oracle login --target chatgpt --browser-keep-browser"
+log "  - When you are ready for browser setup, run: auracall login --target chatgpt --browser-keep-browser"
