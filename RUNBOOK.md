@@ -21055,3 +21055,6 @@ DISPLAY=:0.0 ORACLE_NO_BANNER=1 NODE_NO_WARNINGS=1 pnpm tsx bin/auracall.ts file
   browser, service, credential, or prompt effect has occurred.
 - Provider-free implementation checkpoint
   `52e218df438d279784b38e4db99eb05ce78b5040` is accepted for owned-fork review.
+- The new fork initially exposed no registered workflow despite enabled Actions
+  permissions. Reapplying the owned repository permission registered active CI
+  workflow `353338862`; a docs-only branch synchronization will dispatch PR CI.

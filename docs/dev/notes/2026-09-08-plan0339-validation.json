@@ -110,6 +110,12 @@
     "prompts_submitted": 0,
     "api_service_started": false
   },
+  "owned_fork_ci": {
+    "workflow": "CI",
+    "workflow_id": 353338862,
+    "state": "active",
+    "matrix": ["ubuntu-latest", "macos-latest", "windows-latest"]
+  },
   "remaining": [
     "owned-fork pull request and CI",
     "owned main integration and parity",
