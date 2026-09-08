@@ -114,7 +114,9 @@
     "workflow": "CI",
     "workflow_id": 353338862,
     "state": "active",
-    "matrix": ["ubuntu-latest", "macos-latest", "windows-latest"]
+    "matrix": ["ubuntu-latest", "macos-latest", "windows-2022"],
+    "initial_windows_latest_failure": "The 2026 windows-latest image exposed Visual Studio 18 only; node-gyp 11 could not detect that toolchain while compiling the node-pty development dependency.",
+    "remediation": "Pin the Windows CI lane to windows-2022, whose supported Visual Studio toolchain is compatible with node-gyp 11."
   },
   "remaining": [
     "owned-fork pull request and CI",

@@ -5,7 +5,7 @@ Lane: P32
 Branch: fix/plan0339-downstream-bootstrap-hardening
 Target: main
 Integration: merge
-Revision: 3 | 2026-09-08
+Revision: 4 | 2026-09-08
 
 ## Stable Objective
 
@@ -91,8 +91,10 @@ evidence-driven correction is allowed before local replanning.
 - DH5: MCP tests pass 73 with 3 skips; typecheck, build, and lint pass. The exact
   documented release suite (`--maxWorkers 1 --testTimeout 15000`) passes 3,113
   tests with 65 skips across 330 passing and 21 skipped files. CI uses the same
-  deterministic command on Linux, macOS, and Windows. Accepted implementation
-  checkpoint: `52e218df438d279784b38e4db99eb05ce78b5040`.
+  deterministic command on Linux, macOS, and Windows. The Windows lane is pinned
+  to `windows-2022` because the current `windows-latest` Visual Studio 18 image
+  is not detectable by node-gyp 11. Accepted implementation checkpoint:
+  `52e218df438d279784b38e4db99eb05ce78b5040`.
 - Durable detail: `docs/dev/notes/2026-09-08-plan0339-validation.json`.
 - DH6-DH8 remain open until owned-fork integration and the provider-free local
   install/configuration checks complete.

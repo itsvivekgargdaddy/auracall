@@ -21058,3 +21058,7 @@ DISPLAY=:0.0 ORACLE_NO_BANNER=1 NODE_NO_WARNINGS=1 pnpm tsx bin/auracall.ts file
 - The new fork initially exposed no registered workflow despite enabled Actions
   permissions. Reapplying the owned repository permission registered active CI
   workflow `353338862`; a docs-only branch synchronization will dispatch PR CI.
+- First PR CI reached install/lint on Linux and macOS. The 2026
+  `windows-latest` image failed before tests because node-gyp 11 did not detect
+  its Visual Studio 18 toolchain while building node-pty. Pin Windows to the
+  supported `windows-2022` image and rerun the same matrix gate.
