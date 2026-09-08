@@ -49008,3 +49008,44 @@ Chat repair integrated. Inventory complete at 11. Blank-tab readiness fix instal
 ## 2026-09-06 | Plan 0338 integrated and closed
 
 - Published visible-composer upload validation and both handoff selector cases at `3cfb1de941a6b9c9a445874c7ec001513b273d65`. All provider-free gates pass; temporary worktree removed after clean/ancestry/process/custody checks. Installed and live state remains unchanged.
+
+## 2026-09-08 | Plan 0339 downstream bootstrap hardening opened
+
+- Created the owned `itsvivekgargdaddy/auracall` fork from source commit
+  `3861d28104e8a731ae172d637f299e0c50664152`; local `origin` points to the
+  fork and `upstream` is fetch-only with a disabled push URL.
+- Pre-change provider-free typecheck, build, selected CLI/MCP tests, and CLI
+  dry-run passed. Production audit found one critical and 29 high advisories;
+  Node 24 exposed missing native build prerequisites and a WSL bootstrap check
+  that only accepts Node 22.
+- P32 will remediate those install/security defects, remove active
+  source-operator defaults, align CI and the bundled skill, validate the full
+  provider-free lane, publish only to the owned fork, install the CLI runtime,
+  and register a prompt-gated narrow Codex MCP server. No service, browser,
+  login, provider call, or prompt is authorized.
+
+## 2026-09-08 | Plan 0339 provider-free hardening validated
+
+- Complete and production dependency audits now report zero advisories. The
+  active downstream docs, package metadata, license, service default, local MCP
+  launch examples, bundled skill, WSL bootstrap, and CI minimum Node version
+  are repaired.
+- The downstream contract passes 3 tests and MCP coverage passes 73 with
+  3 skips. Typecheck, build, and lint pass. Two exact-source failures were
+  corrected as host-portable fixtures, and the documented single-worker release
+  suite passes all 3,113 tests with 65 skips. CI now uses the same stable gate.
+- Durable evidence is in
+  `docs/dev/notes/2026-09-08-plan0339-validation.json`. Owned-fork integration
+  and provider-free local installation remain; effect boundaries are unchanged.
+
+## 2026-09-08 | Plan 0339 CI scope corrected
+
+- PR CI proved the complete release suite on Ubuntu/WSL, but also exposed that
+  inherited WSL simulations do not apply on macOS and colon-bearing runtime
+  directory IDs are not valid on native Windows.
+- CI now runs the complete 3,113-test gate on the target Ubuntu/WSL lane and an
+  83-test portable downstream-bootstrap/MCP gate on macOS and Windows, in
+  addition to frozen install and lint everywhere. The cross-platform subset
+  excludes one two-case MCP HTTP status test that creates the same unsupported
+  colon-bearing Windows directory; it remains in the Linux gate. No platform
+  failure crossed the provider-free effect boundary.

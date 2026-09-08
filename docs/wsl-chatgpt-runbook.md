@@ -73,7 +73,7 @@ sudo apt-get install -y google-chrome-stable
 
 ```bash
 AURACALL_BROWSER_REMOTE_DEBUG_HOST=127.0.0.1 \
-oracle --profile default --target chatgpt login --browser-keep-browser
+auracall --profile default --target chatgpt login --browser-keep-browser
 ```
 
 4) Optional: configure a second WSL browser profile for another account (for example, Pro testing):
@@ -96,7 +96,7 @@ oracle --profile default --target chatgpt login --browser-keep-browser
     default: {
       services: {
         chatgpt: {
-          identity: { email: "ecochran76@gmail.com" }
+          identity: { email: "<chatgpt-email>" }
         }
       }
     },
@@ -106,7 +106,7 @@ oracle --profile default --target chatgpt login --browser-keep-browser
       defaultService: "chatgpt",
       services: {
         chatgpt: {
-          identity: { email: "consult@polymerconsultingroup.com" }
+          identity: { email: "<second-chatgpt-email>" }
         }
       }
     }

@@ -553,9 +553,9 @@ log-tail checks as one release gate before live dogfood.
 - Same as the CLI: heavy models (e.g., GPT‑5 Pro) detach by default; reattach via `auracall session <id>` / `auracall status`. MCP does not expose extra background flags.
 
 ## Launching & usage
-- Installed from npm:
-  - One-off: `npx auracall auracall-mcp`
-  - Global: `auracall-mcp`
+- Installed from this checkout:
+  - `pnpm run install:user-runtime`
+  - `auracall-mcp`
 - From the repo (contributors):
   - `pnpm build`
   - `pnpm mcp` (or `auracall-mcp` in the repo root)
@@ -564,15 +564,15 @@ log-tail checks as one release gate before live dogfood.
   {
     "name": "auracall",
     "type": "stdio",
-    "command": "npx",
-    "args": ["auracall", "auracall-mcp"]
+    "command": "auracall-mcp",
+    "args": []
   }
   ```
 - Project-scoped Claude (.mcp.json) example:
   ```json
   {
     "mcpServers": {
-      "auracall": { "type": "stdio", "command": "npx", "args": ["auracall", "auracall-mcp"] }
+      "auracall": { "type": "stdio", "command": "auracall-mcp", "args": [] }
     }
   }
   ```

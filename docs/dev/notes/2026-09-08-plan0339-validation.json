@@ -1,0 +1,140 @@
+{
+  "plan": "0339",
+  "phase": "pre-integration",
+  "source_repository": "ecochran76/auracall",
+  "owned_repository": "itsvivekgargdaddy/auracall",
+  "source_commit": "3861d28104e8a731ae172d637f299e0c50664152",
+  "source_sync_tag": "upstream/ecochran76-main-2026-09-08",
+  "branch": "fix/plan0339-downstream-bootstrap-hardening",
+  "implementation_commit": "52e218df438d279784b38e4db99eb05ce78b5040",
+  "environment": {
+    "platform": "WSL2 Ubuntu 26.04",
+    "supported_validation_node": "22.23.2",
+    "host_default_node": "24.19.0",
+    "pnpm": "10.23.0"
+  },
+  "dependency_audit": {
+    "untouched_full": {
+      "info": 0,
+      "low": 5,
+      "moderate": 46,
+      "high": 41,
+      "critical": 2
+    },
+    "untouched_production": {
+      "info": 0,
+      "low": 5,
+      "moderate": 39,
+      "high": 29,
+      "critical": 1
+    },
+    "hardened_full": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0
+    },
+    "hardened_production": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0
+    }
+  },
+  "validation": {
+    "frozen_install": {
+      "command": "pnpm install --frozen-lockfile --force",
+      "exit_code": 0,
+      "native_node_pty_load": "ok"
+    },
+    "downstream_contract": {
+      "command": "pnpm exec vitest run tests/downstreamBootstrap.contract.test.ts",
+      "files_passed": 1,
+      "tests_passed": 3,
+      "exit_code": 0
+    },
+    "mcp": {
+      "files_passed": 34,
+      "files_skipped": 2,
+      "tests_passed": 73,
+      "tests_skipped": 3,
+      "exit_code": 0
+    },
+    "typecheck_exit_code": 0,
+    "build_exit_code": 0,
+    "lint": {
+      "exit_code": 0,
+      "warnings": 207,
+      "infos": 13,
+      "errors": 0
+    },
+    "full_suite": {
+      "command": "pnpm vitest run --maxWorkers 1 --testTimeout 15000",
+      "files_passed": 330,
+      "files_skipped": 21,
+      "files_failed": 0,
+      "tests_passed": 3113,
+      "tests_skipped": 65,
+      "tests_failed": 0,
+      "duration_seconds": 188.38,
+      "exit_code": 0
+    },
+    "untouched_source_reproduction": {
+      "checkout": "temporary detached clone at exact source_commit",
+      "focused_tests_failed": 2,
+      "failure_signatures_identical": true,
+      "failures": [
+        "tests/browser/login.test.ts > resolveBrowserLoginOptionsFromUserConfig > derives login prep from the resolved launch profile",
+        "tests/mediaBrowserExecutor.test.ts > browser media generation executor queueing > queues Gemini browser media execution behind an active same-profile operation"
+      ]
+    },
+    "portable_fixture_corrections": [
+      "login test creates its cookie fixture instead of assuming the source maintainer's Windows cookie database exists",
+      "media queue test locks the unified resolved launch-profile path instead of a legacy direct path",
+      "rate-limit test seeds an exact persisted over-budget state instead of relying on millisecond wall-clock coincidence",
+      "CI uses the repository's documented single-worker release gate to avoid unrelated parallel timing contention"
+    ],
+    "parallel_runner_observation": {
+      "acceptance_gate": false,
+      "result": "timing-sensitive background drain assertion observed once under full parallel load",
+      "disposition": "single-worker release command is the repository-documented and CI acceptance gate"
+    },
+    "bootstrap_shell_syntax_exit_code": 0
+  },
+  "effects": {
+    "source_repository_writes": 0,
+    "provider_calls": 0,
+    "browser_launches": 0,
+    "prompts_submitted": 0,
+    "api_service_started": false
+  },
+  "owned_fork_ci": {
+    "workflow": "CI",
+    "workflow_id": 353338862,
+    "state": "active",
+    "matrix": ["ubuntu-latest", "macos-latest", "windows-2022"],
+    "validation_scope": {
+      "ubuntu-latest": "complete provider-free single-worker release suite plus build",
+      "macos-latest": "frozen install, lint, and 83 portable downstream bootstrap/MCP contract tests",
+      "windows-2022": "frozen install, lint, and 83 portable downstream bootstrap/MCP contract tests"
+    },
+    "initial_windows_latest_failure": "The 2026 windows-latest image exposed Visual Studio 18 only; node-gyp 11 could not detect that toolchain while compiling the node-pty development dependency.",
+    "full_matrix_observation_run": 34256123031,
+    "full_matrix_observations": [
+      "Ubuntu passed the complete release suite and build.",
+      "macOS full-suite failures were concentrated in inherited WSL simulations and PTY assumptions that do not represent the target WSL platform.",
+      "Windows full-suite failures were dominated by inherited colon-bearing runtime directory names, which Windows filesystems reject."
+    ],
+    "portable_matrix_observation_run": 34257940216,
+    "portable_matrix_correction": "Exclude tests/mcp.apiOpsBrowserStatus.test.ts from the cross-platform subset because its two HTTP status cases create the same inherited colon-bearing runtime directory; the test remains in the complete Ubuntu/WSL gate.",
+    "remediation": "Pin Windows to windows-2022 for its node-gyp-compatible toolchain; retain the complete suite on the target Ubuntu/WSL lane and run 83 portable bootstrap/MCP contracts on macOS and Windows."
+  },
+  "remaining": [
+    "owned-fork pull request and CI",
+    "owned main integration and parity",
+    "user-scoped runtime and skill install",
+    "restricted Codex MCP registration and smoke checks"
+  ]
+}

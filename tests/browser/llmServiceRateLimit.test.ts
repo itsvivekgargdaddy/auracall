@@ -534,11 +534,34 @@ describe("llmService ChatGPT rate-limit guard", () => {
 			await expect(
 				second.runGuarded("updateProjectInstructions", async () => undefined),
 			).resolves.toBeUndefined();
+			const budgetRecordedAt = Date.now();
+			await writeChatgptRateLimitGuardState(
+				{
+					provider: "chatgpt",
+					profile: "default",
+					updatedAt: budgetRecordedAt,
+					lastMutationAt: budgetRecordedAt,
+					recentMutationAts: [budgetRecordedAt, budgetRecordedAt, budgetRecordedAt],
+					recentMutations: [
+						{ at: budgetRecordedAt, action: "renameConversation", weight: 1, quietMs: 0 },
+						{
+							at: budgetRecordedAt,
+							action: "updateProjectInstructions",
+							weight: 1,
+							quietMs: 0,
+						},
+						{ at: budgetRecordedAt, action: "deleteConversation", weight: 1.5, quietMs: 0 },
+					],
+				},
+				{ profileName: "default" },
+			);
 			const startedAt = Date.now();
 			await expect(
 				third.runGuarded("deleteConversation", async () => undefined),
 			).resolves.toBeUndefined();
-			expect(Date.now() - startedAt).toBeGreaterThanOrEqual(30);
+			// The frozen persisted window leaves about 120 ms. Keep enough margin
+			// for filesystem and scheduler variance while proving a real budget wait.
+			expect(Date.now() - startedAt).toBeGreaterThanOrEqual(80);
 		} finally {
 			await rm(homeDir, { recursive: true, force: true });
 		}

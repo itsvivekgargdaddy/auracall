@@ -11,17 +11,22 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os: [ubuntu-latest, macos-latest, windows-2022]
 
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v6
         with:
-          node-version: '20'
+          node-version: '22'
       - uses: pnpm/action-setup@v4
       - run: pnpm install --frozen-lockfile
       - run: pnpm run lint
-      - run: pnpm run test
+      - name: Run full provider-free acceptance suite
+        if: runner.os == 'Linux'
+        run: pnpm vitest run --maxWorkers 1 --testTimeout 15000
+      - name: Run portable bootstrap and MCP contracts
+        if: runner.os != 'Linux'
+        run: pnpm vitest run tests/downstreamBootstrap.contract.test.ts tests/mcp --exclude tests/mcp.apiOpsBrowserStatus.test.ts --maxWorkers 1 --testTimeout 15000
       - run: pnpm run build
         if: matrix.os == 'ubuntu-latest'

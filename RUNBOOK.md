@@ -21022,3 +21022,61 @@ DISPLAY=:0.0 ORACLE_NO_BANNER=1 NODE_NO_WARNINGS=1 pnpm tsx bin/auracall.ts file
   a green gate from the empty checks list.
 
 - Plan 0334 final validation: 3,087 full-suite passes and 65 skips. The mutation-audit expectation is repaired (six focused passes). One Grok readback timeout reproduces on unchanged origin/main 882c9c14 and is nonblocking for Skills. Local focused/typecheck/build/lint/live proof is accepted; GitHub has no CI results and no required branch checks or rulesets.
+
+## Turn 428 | 2026-09-08
+
+- Plan 0339/P32 opens on the newly owned `itsvivekgargdaddy/auracall` fork at
+  source commit `3861d281`. `origin` is owned; the Eric Cochran upstream remote
+  is fetch-only with its push URL disabled.
+- Provider-free reconnaissance passed typecheck, build, ten focused test files
+  (28 tests), version, and dry-run. The production audit reports one critical
+  and 29 high advisories, so installation is gated on dependency remediation.
+- The bounded lane also repairs downstream metadata/license, operator-specific
+  runtime defaults, the Node-22-only WSL bootstrap check, CI's Node 20 drift,
+  and the stale bundled Codex skill. After full provider-free validation it
+  may publish to the owned fork, install the user CLI, and register a narrow
+  prompt-gated MCP server. API service, browser, login, and prompt effects are
+  excluded.
+
+## Turn 429 | 2026-09-08
+
+- Plan 0339 remediation reduces the untouched production audit from
+  1 critical/29 high/39 moderate/5 low and the complete audit from
+  2 critical/41 high/46 moderate/5 low to zero advisories.
+- Downstream metadata and active examples are operator-neutral; the service
+  template fails closed, the WSL bootstrap accepts Node 22+, installs native
+  prerequisites, and uses the frozen lockfile; CI now tests Node 22.
+- Three downstream contract tests and 73 MCP tests pass with typecheck, build,
+  and lint. Two exact-source failures were host-coupled fixtures; their portable
+  corrections pass all eight affected tests. The documented single-worker
+  release suite passes all 3,113 tests with 65 skips, and CI now uses that gate.
+- Publication, user-runtime/skill installation, narrow prompt-gated Codex MCP
+  registration, and final provider-free smoke evidence remain. No provider,
+  browser, service, credential, or prompt effect has occurred.
+- Provider-free implementation checkpoint
+  `52e218df438d279784b38e4db99eb05ce78b5040` is accepted for owned-fork review.
+- The new fork initially exposed no registered workflow despite enabled Actions
+  permissions. Reapplying the owned repository permission registered active CI
+  workflow `353338862`; a docs-only branch synchronization will dispatch PR CI.
+- First PR CI reached install/lint on Linux and macOS. The 2026
+  `windows-latest` image failed before tests because node-gyp 11 did not detect
+  its Visual Studio 18 toolchain while building node-pty. Pin Windows to the
+  supported `windows-2022` image and rerun the same matrix gate.
+
+## Turn 430 | 2026-09-08
+
+- Owned-fork PR CI run `34256123031` passed frozen install and lint on all
+  three runners; Ubuntu also passed the complete 3,113-test release suite and
+  production build.
+- The same complete suite is not cross-platform as inherited: macOS reported
+  25 failures concentrated in WSL-only simulations and PTY assumptions, while
+  Windows reported 346 failures dominated by colon-bearing runtime directory
+  names that are invalid on Windows. These are target-scope findings, not
+  provider failures; no browser, service, credential, or prompt effect ran.
+- Revisions 5-6 keep the complete deterministic suite on the target Ubuntu/WSL
+  lane. macOS and Windows retain frozen install and lint, then run 83 portable
+  downstream-bootstrap and MCP contract tests. The first narrowed Windows run
+  showed that two MCP API-operations status cases create the same unsupported
+  colon-bearing directory; they remain covered by the complete Linux gate and
+  are excluded only from the cross-platform subset. Plan audit remains at zero
+  errors.
